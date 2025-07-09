@@ -1,5 +1,5 @@
 import { spacing } from "@/constants/Spacing";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { useNavigation } from "../../contexts/NavigationContext";
 import { ThemedView } from "../ThemedView";
@@ -23,11 +23,12 @@ export function AnimatedContent() {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
-            marginBottom: spacing.tabHeight,
             paddingTop: spacing.pagePaddingVertical,
+            height: "100%",
           }}
         >
           <CurrentPageComponent />
+          <View style={{ height: spacing.tabHeight }} />
         </ScrollView>
       </AnimatedView>
     </ThemedView>
