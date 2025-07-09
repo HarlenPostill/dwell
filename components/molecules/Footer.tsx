@@ -57,7 +57,7 @@ export function Footer() {
   const footerButtons: { icon: string; tab: TabType }[] = [
     { icon: "calendar-today", tab: "calendar" },
     { icon: "home-filled", tab: "home" },
-    { icon: "account-circle", tab: "profile" },
+    { icon: "account-circle", tab: "settings" },
   ];
 
   return (

@@ -3,6 +3,7 @@ import { Header } from "@/components/molecules/Header";
 import { AnimatedContent } from "@/components/organisms/AnimatedContent";
 import { HomePageContent } from "@/components/organisms/HomePageContent";
 import { PageWrapper } from "@/components/organisms/PageWrapper";
+import { SettingsPageContent } from "@/components/organisms/SettingsPageContent";
 import {
   NavigationProvider,
   PageConfig,
@@ -16,15 +17,25 @@ const pageConfigs: Record<TabType, PageConfig> = {
     hasBack: false,
     component: HomePageContent,
   },
+  reminders: {
+    title: "Reminders",
+    hasBack: true,
+    component: SettingsPageContent,
+  },
   calendar: {
     title: "Calendar",
     hasBack: false,
     component: HomePageContent,
   },
-  profile: {
-    title: "Profile",
+  settings: {
+    title: "Settings",
     hasBack: false,
-    component: HomePageContent,
+    component: SettingsPageContent,
+  },
+  accountDetails: {
+    title: "Account Details",
+    hasBack: true,
+    component: SettingsPageContent,
   },
 };
 

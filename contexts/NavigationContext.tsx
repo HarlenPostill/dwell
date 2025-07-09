@@ -1,7 +1,12 @@
 import React, { createContext, ReactNode, useContext } from "react";
 import { runOnJS, useSharedValue, withTiming } from "react-native-reanimated";
 
-export type TabType = "calendar" | "home" | "profile";
+export type TabType =
+  | "calendar"
+  | "home"
+  | "settings"
+  | "accountDetails"
+  | "reminders";
 
 export interface PageConfig {
   title: string;
@@ -59,7 +64,7 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({
     const newConfig = pageConfigs[newTab];
 
     // Determine slide direction based on tab order
-    const tabOrder: TabType[] = ["calendar", "home", "profile"];
+    const tabOrder: TabType[] = ["calendar", "home", "settings"];
     const currentIndex = tabOrder.indexOf(currentTab);
     const newIndex = tabOrder.indexOf(newTab);
     const slideDirection = newIndex > currentIndex ? 1 : -1;

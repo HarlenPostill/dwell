@@ -6,18 +6,17 @@ import { useNavigation } from "@/contexts/NavigationContext";
 import React from "react";
 import { View } from "react-native";
 
-export function HomePageContent() {
+export function SettingsPageContent() {
   const { navigateToTab } = useNavigation();
-
   return (
     <View style={{ gap: spacing.pageGap }}>
-      <SubTitle>Todays the day!</SubTitle>
+      <SubTitle>Settings</SubTitle>
       <SubTitleFrame title="Nothing is done" />
       <Button
         onPress={() => {
           navigateToTab("accountDetails");
         }}
-        title="Add reminders"
+        title="Account Details"
       />
     </View>
   );

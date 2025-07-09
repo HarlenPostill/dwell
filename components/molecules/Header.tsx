@@ -18,6 +18,7 @@ export function Header() {
     headerTranslateX,
     backButtonOpacity,
     backButtonScale,
+    navigateToTab,
   } = useNavigation();
 
   const secondary = useThemeColor({}, "secondary");
@@ -36,6 +37,7 @@ export function Header() {
   const handleBackPress = () => {
     // You can customize this behavior - maybe navigate to a specific tab
     // or implement actual navigation history
+    navigateToTab("home");
     console.log("Back button pressed");
   };
 
