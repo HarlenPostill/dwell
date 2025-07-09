@@ -11,6 +11,7 @@ import { ThemedView } from "../ThemedView";
 
 const AnimatedTouchableOpacity =
   Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedThemedView = Animated.createAnimatedComponent(ThemedView);
 
 interface FooterButtonProps {
   icon: string;
@@ -52,7 +53,10 @@ function FooterButton({ icon, tab, isSelected, onPress }: FooterButtonProps) {
 }
 
 export function Footer() {
-  const { currentTab, navigateToTab } = useNavigation();
+  const { currentTab, navigateToTab, footerTranslateY, footerOpacity } =
+    useNavigation();
+
+  const background = useThemeColor({}, "background");
 
   const footerButtons: { icon: string; tab: TabType }[] = [
     { icon: "calendar-today", tab: "calendar" },
@@ -60,16 +64,32 @@ export function Footer() {
     { icon: "account-circle", tab: "settings" },
   ];
 
+  const tabValues = footerButtons.map((btn) => btn.tab);
+
+  const footerAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: footerTranslateY.value }],
+    opacity: footerOpacity.value,
+  }));
+
   return (
-    <ThemedView
-      style={{
-        paddingHorizontal: 50,
-        paddingTop: 20,
-        paddingBottom: 40,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
+    <AnimatedThemedView
+      style={[
+        {
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: background,
+          paddingHorizontal: 50,
+          paddingTop: 20,
+          paddingBottom: 40,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        },
+        footerAnimatedStyle,
+      ]}
+      pointerEvents={tabValues.includes(currentTab) ? "auto" : "none"}
     >
       {footerButtons.map(({ icon, tab }) => (
         <FooterButton
@@ -80,6 +100,6 @@ export function Footer() {
           onPress={() => navigateToTab(tab)}
         />
       ))}
-    </ThemedView>
+    </AnimatedThemedView>
   );
 }

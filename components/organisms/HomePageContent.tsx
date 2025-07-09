@@ -12,12 +12,18 @@ export function HomePageContent() {
   return (
     <View style={{ gap: spacing.pageGap }}>
       <SubTitle>Todays the day!</SubTitle>
-      <SubTitleFrame title="Nothing is done" />
       <Button
         onPress={() => {
-          navigateToTab("accountDetails");
+          navigateToTab("reminders");
         }}
-        title="Add reminders"
+        title="Add Reminders"
+      />
+      <SubTitleFrame title="High Priority" />
+      <Button
+        onPress={() => {
+          navigateToTab("reminders");
+        }}
+        title="Edit Reminders"
       />
     </View>
   );

@@ -25,6 +25,8 @@ interface NavigationContextType {
   contentTranslateX: any;
   backButtonOpacity: any;
   backButtonScale: any;
+  footerTranslateY: any;
+  footerOpacity: any;
 }
 
 const NavigationContext = createContext<NavigationContextType | undefined>(
@@ -56,6 +58,10 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({
   const contentTranslateX = useSharedValue(0);
   const backButtonOpacity = useSharedValue(pageConfigs.home.hasBack ? 1 : 0);
   const backButtonScale = useSharedValue(pageConfigs.home.hasBack ? 1 : 0);
+  const footerTranslateY = useSharedValue(0);
+  const footerOpacity = useSharedValue(1);
+
+  const footerTabs: TabType[] = ["home", "calendar", "settings"];
 
   const navigateToTab = (newTab: TabType) => {
     if (newTab === currentTab) return;
@@ -63,11 +69,32 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({
     const currentConfig = pageConfigs[currentTab];
     const newConfig = pageConfigs[newTab];
 
-    // Determine slide direction based on tab order
-    const tabOrder: TabType[] = ["calendar", "home", "settings"];
+    const currentHasFooter = footerTabs.includes(currentTab);
+    const newHasFooter = footerTabs.includes(newTab);
+
+    const tabOrder: TabType[] = [
+      "calendar",
+      "home",
+      "reminders",
+      "settings",
+      "accountDetails",
+    ];
     const currentIndex = tabOrder.indexOf(currentTab);
     const newIndex = tabOrder.indexOf(newTab);
     const slideDirection = newIndex > currentIndex ? 1 : -1;
+
+    // Footer animation
+    if (currentHasFooter !== newHasFooter) {
+      if (newHasFooter) {
+        footerTranslateY.value = 100;
+        footerOpacity.value = 0;
+        footerTranslateY.value = withTiming(0, { duration: 250 });
+        footerOpacity.value = withTiming(1, { duration: 250 });
+      } else {
+        footerTranslateY.value = withTiming(100, { duration: 200 });
+        footerOpacity.value = withTiming(0, { duration: 200 });
+      }
+    }
 
     // Header animation
     headerOpacity.value = withTiming(0, { duration: 150 });
@@ -116,6 +143,8 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({
     contentTranslateX,
     backButtonOpacity,
     backButtonScale,
+    footerTranslateY,
+    footerOpacity,
   };
 
   return (
