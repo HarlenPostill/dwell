@@ -19,17 +19,17 @@ export function AnimatedContent() {
 
   return (
     <ThemedView style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{
-          marginBottom: spacing.tabHeight,
-          paddingTop: spacing.pagePaddingVertical,
-        }}
-      >
-        <AnimatedView style={contentAnimatedStyle}>
+      <AnimatedView style={contentAnimatedStyle}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            marginBottom: spacing.tabHeight,
+            paddingTop: spacing.pagePaddingVertical,
+          }}
+        >
           <CurrentPageComponent />
-        </AnimatedView>
-      </ScrollView>
+        </ScrollView>
+      </AnimatedView>
     </ThemedView>
   );
 }
