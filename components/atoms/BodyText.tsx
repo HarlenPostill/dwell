@@ -10,7 +10,7 @@ export function BodyText({
 }: ThemedTextProps) {
   const color = useThemeColor(
     { light: lightColor, dark: darkColor },
-    "secondary"
+    "textSecondary"
   );
   return <Text style={[{ color }, styles.bodyText, style]} {...rest} />;
 }

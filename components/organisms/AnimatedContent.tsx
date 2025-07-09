@@ -1,5 +1,5 @@
 import { spacing } from "@/constants/Spacing";
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { useNavigation } from "../../contexts/NavigationContext";
 import { ThemedView } from "../ThemedView";
@@ -19,9 +19,17 @@ export function AnimatedContent() {
 
   return (
     <ThemedView style={styles.container}>
-      <AnimatedView style={contentAnimatedStyle}>
-        <CurrentPageComponent />
-      </AnimatedView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{
+          marginBottom: spacing.tabHeight,
+          paddingTop: spacing.pagePaddingVertical,
+        }}
+      >
+        <AnimatedView style={contentAnimatedStyle}>
+          <CurrentPageComponent />
+        </AnimatedView>
+      </ScrollView>
     </ThemedView>
   );
 }
@@ -34,5 +42,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: spacing.pageBorderRadius,
     borderTopRightRadius: spacing.pageBorderRadius,
     padding: spacing.pagePaddingHorizontal,
+    paddingTop: 0,
   },
 });
